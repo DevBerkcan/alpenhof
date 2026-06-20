@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================================
+   ALPENHOF – Designsystem
+   Creative Direction: "Cinematic Alpine Luxury"
+   Tiefes warmes Anthrazit · Champagner-Gold · Gletscher-Türkis
+   ========================================================================= */
+
+:root {
+  /* Farben als RGB-Tripel (für Tailwind <alpha-value>) */
+  --ink: 18 16 14;          /* #12100E – Haupt-Hintergrund */
+  --coal: 28 25 22;         /* #1C1916 – Panels / Karten */
+  --cream: 244 240 233;     /* #F4F0E9 – Text auf dunkel */
+  --gold: 201 168 106;      /* #C9A86A – Akzent / Champagner-Gold */
+  --gold-soft: 184 148 106; /* #B8946A – weicheres Gold */
+  --glacier: 138 178 178;   /* #8AB2B2 – Wellness-Türkis */
+  --stone: 138 130 120;     /* #8A8278 – gedämpfter Text */
+}
+
+* {
+  border-color: rgb(var(--cream) / 0.08);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Lenis übernimmt das Smooth-Scrolling – natives smooth-behavior aus */
+  scroll-behavior: auto;
+}
+
+body {
+  background-color: rgb(var(--ink));
+  color: rgb(var(--cream));
+  font-feature-settings: "ss01", "cv01";
+  overflow-x: hidden;
+}
+
+/* Lenis Smooth-Scroll Setup -------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Eigene Scrollbar ----------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--ink));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--gold) / 0.35);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--gold) / 0.6);
+}
+
+/* Textauswahl ---------------------------------------------------------- */
+::selection {
+  background: rgb(var(--gold) / 0.85);
+  color: rgb(var(--ink));
+}
+
+@layer components {
+  /* Inhaltscontainer */
+  .container-px {
+    @apply px-6 sm:px-10 lg:px-16 xl:px-24;
+  }
+
+  /* Kleines Label / Kapitel-Marker */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-sans uppercase tracking-[0.32em] text-gold;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-8 bg-gold/60;
+  }
+
+  /* Glas-Oberfläche (Glassmorphism) */
+  .glass {
+    background: rgb(var(--cream) / 0.04);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid rgb(var(--cream) / 0.1);
+  }
+
+  /* Goldener Hairline-Trenner */
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/30 to-transparent;
+  }
+
+  /* Schimmernder Gold-Text-Verlauf */
+  .text-shimmer {
+    background: linear-gradient(
+      100deg,
+      rgb(var(--gold-soft)) 20%,
+      rgb(var(--cream)) 40%,
+      rgb(var(--gold)) 60%,
+      rgb(var(--gold-soft)) 80%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @apply animate-shimmer;
+  }
+}
+
+@layer utilities {
+  /* dezentes Filmkorn / Vignette für cinematischen Look */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+}
+
+/* Reduced Motion respektieren ----------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Caption-Einblendung in der Scroll-Experience (GSAP-getrieben) */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
