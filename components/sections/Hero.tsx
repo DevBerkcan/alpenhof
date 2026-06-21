@@ -6,19 +6,11 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { hero } from "@/lib/content";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
-// 3D nur clientseitig laden (kein SSR für Three.js)
-const MountainScene = dynamic(() => import("@/components/3d/MountainScene"), {
-  ssr: false,
-});
-const HeroCrystal = dynamic(() => import("@/components/3d/HeroCrystal"), {
-  ssr: false,
-});
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -86,15 +78,26 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/30 to-ink" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-transparent to-transparent" />
 
-      {/* 3D-Linienlandschaft als dezenter Layer */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 opacity-70">
-        <MountainScene />
+      {/* Morgenlicht-Strahlen – ersetzt HeroCrystal */}
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-1/2 overflow-hidden opacity-30">
+        <div className="absolute right-[-10%] top-[-5%] h-[80%] w-[120%] origin-top-right bg-[conic-gradient(from_200deg_at_80%_10%,transparent_0deg,rgba(201,168,106,0.15)_20deg,transparent_40deg,rgba(201,168,106,0.08)_60deg,transparent_80deg)]" />
       </div>
 
-      {/* Schwebender Bergkristall (3D-Akzent, oben rechts) */}
-      <div className="pointer-events-none absolute right-[-4%] top-[8%] hidden h-[42vh] w-[42vh] opacity-90 md:block">
-        <HeroCrystal />
+      {/* Bergsilhouetten – 3 Ebenen für Tiefenwirkung */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%]">
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-full w-full opacity-20">
+          <path d="M0,320L120,220L240,260L360,160L480,200L600,120L720,180L840,100L960,160L1080,80L1200,140L1320,60L1440,100L1440,320Z" fill="rgb(244 240 233)" />
+        </svg>
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-[80%] w-full opacity-25">
+          <path d="M0,320L180,200L300,240L420,140L540,190L660,80L780,160L900,60L1020,130L1140,40L1260,110L1380,50L1440,80L1440,320Z" fill="rgb(18 16 14)" />
+        </svg>
+        <svg viewBox="0 0 1440 320" preserveAspectRatio="none" className="absolute inset-x-0 bottom-0 h-[55%] w-full opacity-90">
+          <path d="M0,320L200,240L360,270L480,200L600,230L720,160L840,210L1000,150L1140,200L1280,140L1440,180L1440,320Z" fill="rgb(18 16 14)" />
+        </svg>
       </div>
+
+      {/* Alpennebel */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-cream/5 via-transparent to-transparent animate-[fog-drift_12s_ease-in-out_infinite_alternate]" />
 
       {/* Inhalt */}
       <motion.div

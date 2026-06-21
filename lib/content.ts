@@ -54,7 +54,7 @@ export const hero = {
   headlineLines: ["Wo die Berge", "den Atem", "verlangsamen."],
   subline:
     "Ein Refugium zwischen Gipfeln und Wolken. Eingebettet in unberührte Natur – gemacht für Menschen, die wieder durchatmen wollen.",
-  image: "/generated/hero/hero-sunrise.jpg",
+  image: "/images/berechtegaden-königssee.jpg",
   // Optional: lege /public/videos/hero.mp4 ab und trage den Pfad hier ein,
   // dann wird statt des Bildes ein Video-Hintergrund genutzt.
   video: "" as string,
@@ -159,7 +159,7 @@ export const rooms = {
       description:
         "Rundes Zimmer im historischen Turm mit 270°-Blick und gemütlicher Leseecke in der Fensternische.",
       features: ["Rundum-Blick", "Leseecke", "Altholz-Interieur", "Regendusche"],
-      image: "/images/room-tower.jpg",
+      image: "/images/zimmer_beispiel.jpg",
     },
   ] satisfies Room[],
 };
@@ -173,7 +173,7 @@ export const wellness = {
   heading: "Wasser, Wärme, Weite.",
   intro:
     "2.400 m² Ruhe: ein beheizter Infinity-Pool, der scheinbar ins Tal kippt, sieben Saunen, Eisbrunnen und Behandlungsräume, in denen die Zeit stillsteht.",
-  image: "/images/wellness.jpg",
+  image: "/images/Spa_bereich.jpg",
   experiences: [
     {
       title: "Infinity Sky-Pool",
@@ -265,11 +265,11 @@ export const gallery = {
   heading: "Momente am Alpenhof.",
   intro: "Ein Vorgeschmack auf das, was euch erwartet.",
   items: [
-    { image: "/images/gallery-1.jpg", alt: "Suite mit Bergblick", span: "tall" },
+    { image: "/images/zimmer_beispiel.jpg", alt: "Suite mit Bergblick", span: "tall" },
     { image: "/images/gallery-2.jpg", alt: "Infinity-Pool über dem Tal", span: "wide" },
     { image: "/images/gallery-3.jpg", alt: "Detail Altholz & Stein", span: "normal" },
     { image: "/images/gallery-4.jpg", alt: "Gedeckter Tisch am Abend", span: "normal" },
-    { image: "/images/gallery-5.jpg", alt: "Sauna mit Panoramafenster", span: "tall" },
+    { image: "/images/wellness_hotel.jpg", alt: "Rustikale Holzsauna", span: "tall" },
     { image: "/images/gallery-6.jpg", alt: "Bergpanorama im Morgenlicht", span: "wide" },
     { image: "/images/gallery-7.jpg", alt: "Kaminbar bei Nacht", span: "normal" },
     { image: "/images/gallery-8.jpg", alt: "Terrasse mit Aussicht", span: "normal" },
@@ -288,7 +288,12 @@ export const booking = {
   image: "/images/cta-bg.jpg",
   primaryCta: { label: "Jetzt anfragen", href: "mailto:willkommen@alpenhof.de" },
   phoneCta: { label: "+49 8000 000 000", href: "tel:+498000000000" },
-  perks: ["Bestpreis-Garantie", "Kostenfreie Stornierung bis 14 Tage", "Spa-Eintritt inklusive"],
+  perks: [
+    "Bestpreis-Garantie",
+    "Persönliche Anfrage & Beratung",
+    "Antwort innerhalb von 24 Stunden",
+    "Kostenfreie Stornierung möglich",
+  ],
 };
 
 /* ---------------------------------------------------------------------------
@@ -328,5 +333,75 @@ export const footer = {
     { label: "Instagram", href: "#" },
     { label: "Facebook", href: "#" },
     { label: "Journal", href: "#" },
+  ],
+};
+
+/* ---------------------------------------------------------------------------
+   SCROLL STORY  (nach dem Hero – 4 emotionale Hotel-Beats)
+   --------------------------------------------------------------------------- */
+export const scrollStory = {
+  eyebrow: "Die Alpenhof-Erfahrung",
+  heading: "Jeder Aufenthalt erzählt eine Geschichte.",
+  beats: [
+    {
+      num: "01",
+      title: "Ankommen",
+      text: "Frische Bergluft, der erste Panoramablick. Ein Empfang, der euch sofort entschleunigt – noch bevor ihr die Schwelle überschreitet.",
+    },
+    {
+      num: "02",
+      title: "Entspannen",
+      text: "2.400 m² Stille. Sieben Saunen, Eisbrunnen und ein beheizter Infinity-Pool, der scheinbar ins Tal kippt.",
+    },
+    {
+      num: "03",
+      title: "Genießen",
+      text: "Alpine Küche auf Michelin-Niveau. Kaminbar. Das goldene Alpenglühen beim Abendessen auf der Terrasse.",
+    },
+    {
+      num: "04",
+      title: "Buchen",
+      text: "Euer Refugium wartet. Persönliche Anfrage, Bestpreis-Garantie, Antwort in 24 Stunden.",
+      cta: { label: "Jetzt anfragen", href: "#booking" },
+    },
+  ] as Array<{
+    num: string;
+    title: string;
+    text: string;
+    cta?: { label: string; href: string };
+  }>,
+};
+
+/* ---------------------------------------------------------------------------
+   HOTEL JOURNEY  (Bildsequenz-Walkthrough: Außen → Lobby → Wellness → Zimmer)
+   👉 BILDER ERSETZEN: Tausche die image-Pfade gegen deine echten Fotos aus,
+      sobald du sie hast. Dateinamen in /public/images/ ablegen.
+   --------------------------------------------------------------------------- */
+export const hotelJourney = {
+  scenes: [
+    {
+      label: "Ankommen",
+      title: "Hotel Alpenhof",
+      caption: "Berchtesgadener Land · Eingebettet in die Natur",
+      image: "/images/berechtegaden-königssee.jpg",
+    },
+    {
+      label: "Lobby",
+      title: "Herzlich Willkommen",
+      caption: "Altholz, Naturstein und Wärme – ab dem ersten Schritt",
+      image: "/images/about-1.jpg",
+    },
+    {
+      label: "Wellness",
+      title: "Wasser, Wärme, Weite.",
+      caption: "2.400 m² Spa-Welt für Körper und Geist",
+      image: "/images/Spa_bereich.jpg",
+    },
+    {
+      label: "Zimmer & Suiten",
+      title: "Euer Refugium.",
+      caption: "48 Suiten & Zimmer — jedes mit Bergblick",
+      image: "/images/zimmer_beispiel.jpg",
+    },
   ],
 };

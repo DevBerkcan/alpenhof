@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { footer, navLinks, site } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -12,6 +13,13 @@ export function Footer() {
         {/* Claim + Kontakt */}
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
           <Reveal>
+            <Image
+              src="/images/logo_hotel_alpenhof.png"
+              alt={site.name}
+              width={160}
+              height={64}
+              className="mb-8 h-12 w-auto object-contain brightness-0 invert opacity-70"
+            />
             <p className="font-display text-3xl font-light leading-snug text-cream sm:text-4xl lg:text-5xl">
               {footer.claim}
             </p>

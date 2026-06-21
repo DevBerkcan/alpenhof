@@ -160,3 +160,14 @@ html.lenis body {
     filter: blur(0);
   }
 }
+
+/* Atmosphärische Hotel-Animationen */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes fog-drift {
+  0% { transform: translateX(-2%) scaleX(1.02); opacity: 0.6; }
+  100% { transform: translateX(2%) scaleX(0.98); opacity: 0.9; }
+}

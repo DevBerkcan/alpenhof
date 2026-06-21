@@ -1,18 +1,11 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { wellness } from "@/lib/content";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-
-// 3D-Sphäre clientseitig laden
-const WellnessSphere = dynamic(
-  () => import("@/components/3d/WellnessSphere"),
-  { ssr: false }
-);
 
 export function Wellness() {
   const ref = useRef<HTMLDivElement>(null);
@@ -28,18 +21,15 @@ export function Wellness() {
       ref={ref}
       className="relative overflow-hidden py-28 sm:py-36 lg:py-44"
     >
-      {/* großflächiger Türkis-Schimmer im Hintergrund */}
-      <div className="pointer-events-none absolute -left-40 top-1/4 h-[36rem] w-[36rem] rounded-full bg-glacier/10 blur-[120px]" />
+      {/* Kaminlicht-Glow – ruhige Wärme statt Neon-Blob */}
+      <div className="pointer-events-none absolute -left-32 top-1/4 h-[32rem] w-[32rem] rounded-full bg-[radial-gradient(ellipse,rgba(201,168,106,0.07)_0%,transparent_70%)] blur-[60px] animate-[breathe_6s_ease-in-out_infinite]" />
+      {/* Wasser-Schimmer – dezent rechts */}
+      <div className="pointer-events-none absolute -right-20 bottom-1/4 h-[20rem] w-[20rem] rounded-full bg-[radial-gradient(ellipse,rgba(138,178,178,0.05)_0%,transparent_70%)] blur-[60px] animate-[breathe_8s_ease-in-out_infinite_1s]" />
 
       <div className="container-px relative">
         <div className="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
-          {/* Text + 3D-Sphäre */}
+          {/* Text */}
           <div className="relative">
-            {/* 3D-Sphäre schwebt über dem Text */}
-            <div className="pointer-events-none absolute -right-10 -top-24 h-64 w-64 sm:h-80 sm:w-80 lg:-right-20 lg:-top-28">
-              <WellnessSphere />
-            </div>
-
             <SectionHeading
               eyebrow={wellness.eyebrow}
               heading={wellness.heading}

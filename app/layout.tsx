@@ -4,7 +4,6 @@ import { site } from "@/lib/content";
 import LenisProvider from "@/components/providers/LenisProvider";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Navbar } from "@/components/layout/Navbar";
-import FloatingGuideMount from "@/components/FloatingGuideMount";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -80,7 +79,6 @@ export default function RootLayout({
         />
         <LenisProvider>
           <ScrollProgress />
-          <FloatingGuideMount />
           <Navbar />
           <main>{children}</main>
         </LenisProvider>

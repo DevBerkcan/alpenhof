@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { gallery, type GalleryItem } from "@/lib/content";
 import { MediaImage } from "@/components/ui/MediaImage";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -39,45 +38,17 @@ export function Gallery() {
 }
 
 function TiltCard({ item }: { item: GalleryItem }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const mx = useMotionValue(0);
-  const my = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), {
-    stiffness: 150,
-    damping: 18,
-  });
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-6, 6]), {
-    stiffness: 150,
-    damping: 18,
-  });
-
-  function onMove(e: React.MouseEvent) {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    mx.set((e.clientX - rect.left) / rect.width - 0.5);
-    my.set((e.clientY - rect.top) / rect.height - 0.5);
-  }
-  function reset() {
-    mx.set(0);
-    my.set(0);
-  }
-
   return (
     <motion.div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={reset}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
       variants={{
-        hidden: { opacity: 0, scale: 0.9, y: 30 },
+        hidden: { opacity: 0, y: 24 },
         visible: {
           opacity: 1,
-          scale: 1,
           y: 0,
-          transition: { type: "spring", stiffness: 120, damping: 16 },
+          transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
         },
       }}
+      whileHover={{ y: -6, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
       className={`group relative cursor-pointer overflow-hidden rounded-[2px] ${spanClass[item.span]}`}
     >
       <MediaImage

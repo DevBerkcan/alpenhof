@@ -7,6 +7,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 import { navLinks, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
@@ -39,17 +40,16 @@ export function Navbar() {
                 : "border-transparent bg-transparent"
             )}
           >
-            {/* Wortmarke */}
-            <a
-              href="#top"
-              className="group flex items-baseline gap-2 font-display text-xl tracking-tight text-cream"
-            >
-              <span className="transition-colors group-hover:text-gold">
-                {site.name}
-              </span>
-              <span className="hidden text-[10px] font-sans uppercase tracking-[0.3em] text-stone sm:inline">
-                {site.tagline}
-              </span>
+            {/* Logo */}
+            <a href="#top" className="group flex items-center">
+              <Image
+                src="/images/logo_hotel_alpenhof.png"
+                alt={site.name}
+                width={140}
+                height={56}
+                className="h-10 w-auto object-contain brightness-0 invert transition-opacity duration-300 group-hover:opacity-80 sm:h-12"
+                priority
+              />
             </a>
 
             {/* Desktop-Links */}
@@ -121,9 +121,13 @@ function MobileMenu({
           <div className="relative flex h-full flex-col px-8 pt-8">
             {/* Kopf */}
             <div className="flex items-center justify-between">
-              <span className="font-display text-xl text-cream">
-                {site.name}
-              </span>
+              <Image
+                src="/images/logo_hotel_alpenhof.png"
+                alt={site.name}
+                width={120}
+                height={48}
+                className="h-9 w-auto object-contain brightness-0 invert"
+              />
               <button
                 onClick={onClose}
                 aria-label="Menü schließen"
